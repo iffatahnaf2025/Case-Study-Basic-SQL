@@ -38,6 +38,7 @@ VALUES
 
 select * from students;
 ```
+![Screenshot](asset/picture/1.1.png)
 
 ## 2. 💻 Query Data pada Skema `dvdrental`
 
