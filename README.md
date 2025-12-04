@@ -1,36 +1,72 @@
 # 🚀 SQL Basic Queries Portfolio Case Study
 
-[cite_start]Proyek ini mendokumentasikan serangkaian **query SQL dasar** [cite: 1] [cite_start]yang dibuat untuk praktik manipulasi dan pengambilan data dari dua skema database: **`dibimbing`** (pembuatan skema baru) [cite: 2] dan **`dvdrental`** (kueri pada data yang sudah ada).
+Proyek ini mendokumentasikan serangkaian **query SQL dasar** yang dibuat untuk praktik manipulasi dan pengambilan data dari dua skema database: **`dibimbing`** (pembuatan skema baru) dan **`dvdrental`** (kueri pada data yang sudah ada).
 
-[cite_start]Case study ini mencakup pembuatan tabel (DDL), penyisipan data (DML)[cite: 2], fungsi agregasi, logika kondisional (`CASE`), penggabungan tabel (`JOIN`), dan operasi set (`UNION`).
+Case study ini mencakup pembuatan tabel (DDL), penyisipan data (DML), fungsi agregasi, logika kondisional (`CASE`), penggabungan tabel (`JOIN`), dan operasi set (`UNION`).
 
 ---
 
-## 🛠️ Case Study 1: Pembuatan Skema Baru (`dibimbing`)
+## 1. 🛠️ Pembuatan Database dan Tabel Students
 
-Tujuan utama dari bagian ini adalah mendemonstrasikan kemampuan untuk membuat struktur database dan memasukkan data.
+Bagian ini berfokus pada perintah dasar DDL (Data Definition Language) dan DML (Data Manipulation Language) untuk membuat lingkungan database dan mengisi data.
 
 ### 📝 Tugas
 
-1.  [cite_start]Membuat database bernama `dibimbing`[cite: 3].
-2.  [cite_start]Membuat tabel `students` dengan skema: `id` (PK, int), `nama` (varchar), `institute` (varchar), `berat_badan` (float), dan `tinggi_badan` (float)[cite: 7, 8, 9, 10, 11, 12].
-3.  [cite_start]Memasukkan minimal 5 data ke dalam tabel `students`[cite: 21].
+1.  Membuat database bernama **`dibimbing`**.
+2.  Membuat tabel **`students`** dengan skema: `id` (PK, int), `nama` (varchar), `institute` (varchar), `berat_badan` (float), dan `tinggi_badan` (float).
+3.  Memasukkan minimal 5 data ke dalam tabel `students`.
 
-### 📂 File Terkait
+### 📄 Query Utama
 
-* `Case Study Basic SQL Queries (No 1).sql`
+```sql
+-- Membuat database
+CREATE DATABASE dibimbing;
 
----
+-- Membuat table
+CREATE TABLE students (
+    id INT PRIMARY KEY,
+    nama VARCHAR(100),
+    institute VARCHAR(100),
+    berat_badan FLOAT,
+    tinggi_badan FLOAT
+);
 
-## 💻 Case Study 2: Query Data pada Skema `dvdrental`
+-- Insert value
+INSERT INTO students (id, nama, institute, berat_badan, tinggi_badan)
+VALUES
+(1, 'Ayman Ahnaf', 'Universitas Muhammadiyah Yogyakarta', 65.5, 172.0),
+(2, 'Nadia Putri', 'Universitas Indonesia', 54.2, 160.3),
+(3, 'Rizky Pratama', 'Institut Teknologi Bandung', 70.8, 178.4),
+(4, 'Siti Nurhaliza', 'Universitas Airlangga', 49.7, 158.9),
+(5, 'Dimas Saputra', 'Universitas Gadjah Mada', 80.1, 182.5);
+
+select * from students;
+```
+
+## 2. 💻 Query Data pada Skema `dvdrental`
 
 Bagian ini berfokus pada pengambilan dan analisis data menggunakan operator SQL standar dan lanjutan.
 
-### 1. Kueri dengan `WHERE` dan `IN`
+### 2.1. Memilih Aktor Tertentu
 
-[cite_start]Menampilkan `first_name` dan `last_name` dari aktor yang memiliki `first_name` "Jennifer", "Nick", atau "Ed"[cite: 33].
+Menampilkan `first_name` dan `last_name` dari aktor yang memiliki `first_name` **"Jennifer", "Nick", atau "Ed"**.
 
 ```sql
 SELECT first_name, last_name
 FROM actor
 WHERE first_name IN ('Jennifer', 'Nick', 'Ed');
+```
+
+## 2.2. Agregasi dan Subquery
+Menghitung total pembayaran (`amount`) untuk setiap `payment_id` yang lebih besar dari 5.99. Query ini menggunakan fungsi agregasi (SUM) dan subquery untuk menampilkan total transaksi dan total pembayaran keseluruhan yang memenuhi kriteria.
+
+```sql
+SELECT 
+    p.payment_id,
+    SUM(p.amount) AS "total_amount (>5.99)",
+    (SELECT COUNT(*) FROM payment WHERE amount > 5.99) AS "jumlah_transaksi_total (>5.99)",
+    (SELECT SUM(amount) FROM payment WHERE amount > 5.99) AS "total_pembayaran (>5.99)"
+FROM payment p
+WHERE p.amount > 5.99
+GROUP BY p.payment_id;
+```
