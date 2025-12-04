@@ -6,17 +6,13 @@ Case study ini mencakup pembuatan tabel (DDL), penyisipan data (DML), fungsi agr
 
 ---
 
-## 1. 🛠️ Pembuatan Database dan Tabel Students
+## 1. Pembuatan Database dan Tabel Students
 
-Bagian ini berfokus pada perintah dasar DDL (Data Definition Language) dan DML (Data Manipulation Language) untuk membuat lingkungan database dan mengisi data.
-
-### 📝 Tugas
+Bagian ini berfokus pada perintah dasar DDL (Data Definition Language) dan DML (Data Manipulation Language) untuk membuat lingkungan database dan mengisi data dengan ketentuan berikut:
 
 1.  Membuat database bernama **`dibimbing`**.
 2.  Membuat tabel **`students`** dengan skema: `id` (PK, int), `nama` (varchar), `institute` (varchar), `berat_badan` (float), dan `tinggi_badan` (float).
 3.  Memasukkan minimal 5 data ke dalam tabel `students`.
-
-### 📄 Query Utama
 
 ```sql
 -- Membuat database
@@ -69,4 +65,52 @@ SELECT
 FROM payment p
 WHERE p.amount > 5.99
 GROUP BY p.payment_id;
+```
+## 2.3. Pengelompokan Data dengan CASE
+Mengelompokkan film berdasarkan durasi (`length`) ke dalam 4 kategori menggunakan statement `CASE`.
+
+```sql
+SELECT 
+    title,
+    length,
+    CASE
+        WHEN length > 100 THEN 'Over 100 menit)'
+        WHEN length BETWEEN 87 AND 100 THEN '(87-100 menit)'
+        WHEN length BETWEEN 72 AND 86 THEN '72-86 menit'
+        WHEN length < 72 THEN 'Under 72 menit'
+        ELSE 'Unknown'
+    END AS kategori_durasi
+FROM film;
+```
+## 2.4. Menggabungkan Tabel dengan JOIN
+Menggabungkan data dari tabel `rental` dan `payment` menggunakan `JOIN` berdasarkan `rental_id`. Hasil diurutkan berdasarkan `amount` secara *ascending*.
+
+```sql
+SELECT 
+    r.rental_id,
+    r.rental_date,
+    p.payment_id,
+    p.amount
+FROM rental r
+JOIN payment p ON r.rental_id = p.rental_id
+ORDER BY p.amount ASC;
+```
+
+## 2.5. Operasi Set dengan UNION
+Menggabungkan alamat (`address`) dari tabel address yang memiliki `city_id` **42** dengan yang memiliki `city_id` **300** menggunakan operator `UNION`.
+
+```sql
+SELECT 
+    address_id,
+    address,
+    city_id
+FROM address
+WHERE city_id = 42
+UNION
+SELECT 
+    address_id,
+    address,
+    city_id
+FROM address
+WHERE city_id = 300;
 ```
