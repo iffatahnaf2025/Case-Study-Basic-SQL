@@ -14,6 +14,7 @@ Bagian ini berfokus pada perintah dasar DDL (Data Definition Language) dan DML (
 2.  Membuat tabel **`students`** dengan skema: `id` (PK, int), `nama` (varchar), `institute` (varchar), `berat_badan` (float), dan `tinggi_badan` (float).
 3.  Memasukkan minimal 5 data ke dalam tabel `students`.
 
+### Query
 ```sql
 -- Membuat database
 CREATE DATABASE dibimbing;
@@ -38,7 +39,9 @@ VALUES
 
 select * from students;
 ```
+### Screenshot
 ![Screenshot](asset/picture/1.1.png)
+
 
 ## 2. 💻 Query Data pada Skema `dvdrental`
 
@@ -48,15 +51,19 @@ Bagian ini berfokus pada pengambilan dan analisis data menggunakan operator SQL 
 
 Menampilkan `first_name` dan `last_name` dari aktor yang memiliki `first_name` **"Jennifer", "Nick", atau "Ed"**.
 
+### Query
 ```sql
 SELECT first_name, last_name
 FROM actor
 WHERE first_name IN ('Jennifer', 'Nick', 'Ed');
 ```
+### Screenshot
+![Screenshot](asset/picture/2.1.png)
 
 ## 2.2. Agregasi dan Subquery
 Menghitung total pembayaran (`amount`) untuk setiap `payment_id` yang lebih besar dari 5.99. Query ini menggunakan fungsi agregasi (SUM) dan subquery untuk menampilkan total transaksi dan total pembayaran keseluruhan yang memenuhi kriteria.
 
+### Query
 ```sql
 SELECT 
     p.payment_id,
@@ -67,9 +74,13 @@ FROM payment p
 WHERE p.amount > 5.99
 GROUP BY p.payment_id;
 ```
+### Screenshot
+![Screenshot](asset/picture/2.2.png)
+
 ## 2.3. Pengelompokan Data dengan CASE
 Mengelompokkan film berdasarkan durasi (`length`) ke dalam 4 kategori menggunakan statement `CASE`.
 
+### Query
 ```sql
 SELECT 
     title,
@@ -83,9 +94,13 @@ SELECT
     END AS kategori_durasi
 FROM film;
 ```
+### Screenshot
+![Screenshot](asset/picture/2.3.png)
+
 ## 2.4. Menggabungkan Tabel dengan JOIN
 Menggabungkan data dari tabel `rental` dan `payment` menggunakan `JOIN` berdasarkan `rental_id`. Hasil diurutkan berdasarkan `amount` secara *ascending*.
 
+### Query
 ```sql
 SELECT 
     r.rental_id,
@@ -96,10 +111,13 @@ FROM rental r
 JOIN payment p ON r.rental_id = p.rental_id
 ORDER BY p.amount ASC;
 ```
+### Screenshot
+![Screenshot](asset/picture/2.4.png)
 
 ## 2.5. Operasi Set dengan UNION
 Menggabungkan alamat (`address`) dari tabel address yang memiliki `city_id` **42** dengan yang memiliki `city_id` **300** menggunakan operator `UNION`.
 
+### Query
 ```sql
 SELECT 
     address_id,
@@ -115,3 +133,5 @@ SELECT
 FROM address
 WHERE city_id = 300;
 ```
+### Screenshot
+![Screenshot](asset/picture/2.5.png)
