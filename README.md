@@ -1,8 +1,12 @@
-# 🚀 SQL Basic Queries Portfolio Case Study
+# SQL Basic Queries Portfolio Case Study
 
 Proyek ini mendokumentasikan serangkaian **query SQL dasar** yang dibuat untuk praktik manipulasi dan pengambilan data dari dua skema database: **`dibimbing`** (pembuatan skema baru) dan **`dvdrental`** (kueri pada data yang sudah ada).
 
 Case study ini mencakup pembuatan tabel (DDL), penyisipan data (DML), fungsi agregasi, logika kondisional (`CASE`), penggabungan tabel (`JOIN`), dan operasi set (`UNION`).
+
+## Tools yang Digunakan
+- **DBeaver**: Sebagai database management tool untuk menjalankan query SQL dan mengelola skema database.
+- PostgreSQL (dvdrental): Sebagai database utama untuk case study.
 
 ---
 
