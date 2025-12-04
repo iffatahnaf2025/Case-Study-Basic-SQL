@@ -47,7 +47,7 @@ select * from students;
 ![Screenshot](asset/picture/1.1.png)
 
 
-## 2. 💻 Query Data pada Skema `dvdrental`
+## 2. Query Data pada Skema `dvdrental`
 
 Bagian ini berfokus pada pengambilan dan analisis data menggunakan operator SQL standar dan lanjutan.
 
