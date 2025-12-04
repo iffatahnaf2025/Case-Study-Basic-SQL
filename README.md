@@ -50,6 +50,8 @@ select * from students;
 ## 2. Query Data pada Skema `dvdrental`
 
 Bagian ini berfokus pada pengambilan dan analisis data menggunakan operator SQL standar dan lanjutan.
+Adapun dataset `dvdrental` adalah contoh database PostgreSQL yang berisi data seputar penyewaan DVD, termasuk tabel `film`, `customer`, `rental`, dan lainnya.  
+
 
 ### 2.1. Memilih Aktor Tertentu
 
